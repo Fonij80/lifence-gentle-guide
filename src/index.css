@@ -8,33 +8,52 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Lifence Design System - Friendly & Accessible Colors */
+    --background: 0 0% 98%;
+    --foreground: 210 15% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 15% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 15% 20%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary: Trustworthy soft blue */
+    --primary: 210 65% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 210 65% 75%;
+    --primary-dark: 210 65% 45%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary: Calming green */
+    --secondary: 150 40% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 150 40% 80%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Warm accent color */
+    --accent: 25 90% 70%;
+    --accent-foreground: 210 15% 20%;
+    --accent-light: 25 90% 85%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Muted colors for backgrounds */
+    --muted: 210 20% 96%;
+    --muted-foreground: 210 15% 50%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 20% 90%;
+    --input: 210 20% 95%;
+    --ring: 210 65% 55%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(210, 65%, 55%) 0%, hsl(150, 40%, 60%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(210, 20%, 98%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(25, 90%, 70%) 0%, hsl(25, 90%, 85%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -2px hsl(210, 65%, 55%, 0.1);
+    --shadow-card: 0 2px 12px -2px hsl(210, 15%, 20%, 0.08);
+    --shadow-button: 0 3px 8px -2px hsl(210, 65%, 55%, 0.2);
 
     --radius: 0.5rem;
 
@@ -101,5 +120,42 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-size: 18px; /* Larger base font size for older adults */
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  /* Custom utilities for senior-friendly design */
+  .text-large {
+    @apply text-xl leading-relaxed;
+  }
+  
+  .text-xl-large {
+    @apply text-2xl leading-relaxed;
+  }
+  
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-button {
+    box-shadow: var(--shadow-button);
   }
 }
