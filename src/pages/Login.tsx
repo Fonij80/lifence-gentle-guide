@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
   const { toast } = useToast();
 
@@ -23,14 +23,14 @@ const Login = () => {
     });
     // In a real app, this would redirect to a dashboard or main app
     setTimeout(() => {
-      window.location.href = "/";
+      window.location.href = "/lifence-gentle-guide";
     }, 1500);
   };
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -83,27 +83,40 @@ const Login = () => {
                   type="password"
                   placeholder="Enter your password"
                   value={formData.password}
-                  onChange={(e) => handleInputChange("password", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("password", e.target.value)
+                  }
                   className="h-14 text-large"
                   required
                 />
               </div>
 
-              <Button type="submit" variant="hero" size="xl" className="w-full shadow-button">
+              <Button
+                type="submit"
+                variant="hero"
+                size="xl"
+                className="w-full shadow-button"
+              >
                 Log In
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </form>
 
             <div className="mt-6 text-center space-y-4">
-              <Link to="#" className="text-large text-primary hover:text-primary-dark">
+              <Link
+                to="#"
+                className="text-large text-primary hover:text-primary-dark"
+              >
                 Forgot your password?
               </Link>
-              
+
               <div className="border-t border-border pt-4">
                 <p className="text-large text-muted-foreground">
                   Don't have an account?{" "}
-                  <Link to="/signup" className="text-primary hover:text-primary-dark font-medium">
+                  <Link
+                    to="/signup"
+                    className="text-primary hover:text-primary-dark font-medium"
+                  >
                     Sign up here
                   </Link>
                 </p>

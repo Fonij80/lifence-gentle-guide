@@ -2,7 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Link } from "react-router-dom";
 import { Heart, Shield, ArrowRight } from "lucide-react";
 import { useState } from "react";
@@ -13,7 +19,7 @@ const Signup = () => {
     fullName: "",
     email: "",
     password: "",
-    language: ""
+    language: "",
   });
   const { toast } = useToast();
 
@@ -26,14 +32,14 @@ const Signup = () => {
     });
     // In a real app, this would redirect to onboarding
     setTimeout(() => {
-      window.location.href = "/onboarding";
+      window.location.href = "/lifence-gentle-guide/onboarding";
     }, 1500);
   };
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -71,7 +77,9 @@ const Signup = () => {
                   type="text"
                   placeholder="Enter your full name"
                   value={formData.fullName}
-                  onChange={(e) => handleInputChange("fullName", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("fullName", e.target.value)
+                  }
                   className="h-14 text-large"
                   required
                 />
@@ -101,7 +109,9 @@ const Signup = () => {
                   type="password"
                   placeholder="Create a secure password"
                   value={formData.password}
-                  onChange={(e) => handleInputChange("password", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("password", e.target.value)
+                  }
                   className="h-14 text-large"
                   required
                 />
@@ -111,7 +121,12 @@ const Signup = () => {
                 <Label htmlFor="language" className="text-large font-medium">
                   Preferred Language
                 </Label>
-                <Select value={formData.language} onValueChange={(value) => handleInputChange("language", value)}>
+                <Select
+                  value={formData.language}
+                  onValueChange={(value) =>
+                    handleInputChange("language", value)
+                  }
+                >
                   <SelectTrigger className="h-14 text-large">
                     <SelectValue placeholder="Select your language" />
                   </SelectTrigger>
@@ -133,7 +148,12 @@ const Signup = () => {
                 </p>
               </div>
 
-              <Button type="submit" variant="hero" size="xl" className="w-full shadow-button">
+              <Button
+                type="submit"
+                variant="hero"
+                size="xl"
+                className="w-full shadow-button"
+              >
                 Create My Account
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -142,7 +162,10 @@ const Signup = () => {
             <div className="mt-6 text-center">
               <p className="text-large text-muted-foreground">
                 Already have an account?{" "}
-                <Link to="/login" className="text-primary hover:text-primary-dark font-medium">
+                <Link
+                  to="/login"
+                  className="text-primary hover:text-primary-dark font-medium"
+                >
                   Log in here
                 </Link>
               </p>
