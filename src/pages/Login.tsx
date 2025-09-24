@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Heart, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const Login = () => {
     password: "",
   });
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +25,7 @@ const Login = () => {
     });
     // In a real app, this would redirect to a dashboard or main app
     setTimeout(() => {
-      window.location.href = "/lifence-gentle-guide";
+      navigate("/"); // navigates relative to basename
     }, 1500);
   };
 

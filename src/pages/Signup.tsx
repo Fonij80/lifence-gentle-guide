@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { Heart, Shield, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,7 @@ const Signup = () => {
     language: "",
   });
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,9 +32,9 @@ const Signup = () => {
       title: "Welcome to Lifence!",
       description: "Your account has been created successfully.",
     });
-    // In a real app, this would redirect to onboarding
+    // In a real app, this would redirect to onboardingsetTimeout(() => {
     setTimeout(() => {
-      window.location.href = "/lifence-gentle-guide/onboarding";
+      navigate("/onboarding"); // navigates relative to basename
     }, 1500);
   };
 
