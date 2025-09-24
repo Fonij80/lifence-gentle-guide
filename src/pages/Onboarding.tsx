@@ -3,8 +3,14 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Link } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Link, useNavigate } from "react-router-dom";
 import { Heart, CheckCircle, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -13,9 +19,10 @@ const Onboarding = () => {
   const [formData, setFormData] = useState({
     age: "",
     habits: [] as string[],
-    reminderTime: ""
+    reminderTime: "",
   });
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const habitOptions = [
     { id: "water", label: "Drink Water", icon: "💧" },
@@ -25,7 +32,7 @@ const Onboarding = () => {
     { id: "vitamins", label: "Take Vitamins", icon: "🟡" },
     { id: "sleep", label: "Regular Sleep", icon: "😴" },
     { id: "reading", label: "Daily Reading", icon: "📚" },
-    { id: "walking", label: "Daily Walk", icon: "👟" }
+    { id: "walking", label: "Daily Walk", icon: "👟" },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -36,16 +43,16 @@ const Onboarding = () => {
     });
     // In a real app, this would redirect to the main app interface
     setTimeout(() => {
-      window.location.href = "/";
-    }, 2000);
+      navigate("/"); // navigates relative to basename
+    }, 1500);
   };
 
   const handleHabitChange = (habitId: string, checked: boolean) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      habits: checked 
+      habits: checked
         ? [...prev.habits, habitId]
-        : prev.habits.filter(h => h !== habitId)
+        : prev.habits.filter((h) => h !== habitId),
     }));
   };
 
@@ -71,7 +78,8 @@ const Onboarding = () => {
               Let's Personalize Your Experience
             </h1>
             <p className="text-xl-large text-muted-foreground">
-              Tell us a bit about yourself so we can create the perfect habit plan for you.
+              Tell us a bit about yourself so we can create the perfect habit
+              plan for you.
             </p>
           </div>
 
@@ -83,7 +91,12 @@ const Onboarding = () => {
                 <p className="text-large text-muted-foreground">
                   This helps us provide age-appropriate reminders and tips.
                 </p>
-                <Select value={formData.age} onValueChange={(value) => setFormData(prev => ({...prev, age: value}))}>
+                <Select
+                  value={formData.age}
+                  onValueChange={(value) =>
+                    setFormData((prev) => ({ ...prev, age: value }))
+                  }
+                >
                   <SelectTrigger className="h-14 text-large">
                     <SelectValue placeholder="Select your age range" />
                   </SelectTrigger>
@@ -100,20 +113,31 @@ const Onboarding = () => {
 
               {/* Habits Section */}
               <div className="space-y-4">
-                <h2 className="text-xl-large font-semibold">Choose Your Habits</h2>
+                <h2 className="text-xl-large font-semibold">
+                  Choose Your Habits
+                </h2>
                 <p className="text-large text-muted-foreground">
-                  Select the healthy habits you'd like to build. You can always change these later.
+                  Select the healthy habits you'd like to build. You can always
+                  change these later.
                 </p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {habitOptions.map((habit) => (
-                    <div key={habit.id} className="flex items-center space-x-3 p-4 rounded-lg border border-border hover:bg-muted/30 transition-colors">
+                    <div
+                      key={habit.id}
+                      className="flex items-center space-x-3 p-4 rounded-lg border border-border hover:bg-muted/30 transition-colors"
+                    >
                       <Checkbox
                         id={habit.id}
                         checked={formData.habits.includes(habit.id)}
-                        onCheckedChange={(checked) => handleHabitChange(habit.id, checked as boolean)}
+                        onCheckedChange={(checked) =>
+                          handleHabitChange(habit.id, checked as boolean)
+                        }
                         className="w-5 h-5"
                       />
-                      <Label htmlFor={habit.id} className="text-large flex items-center gap-2 cursor-pointer">
+                      <Label
+                        htmlFor={habit.id}
+                        className="text-large flex items-center gap-2 cursor-pointer"
+                      >
                         <span className="text-xl">{habit.icon}</span>
                         {habit.label}
                       </Label>
@@ -124,20 +148,37 @@ const Onboarding = () => {
 
               {/* Reminder Time Section */}
               <div className="space-y-4">
-                <h2 className="text-xl-large font-semibold">Reminder Preferences</h2>
+                <h2 className="text-xl-large font-semibold">
+                  Reminder Preferences
+                </h2>
                 <p className="text-large text-muted-foreground">
                   When would you like to receive your gentle reminders?
                 </p>
-                <Select value={formData.reminderTime} onValueChange={(value) => setFormData(prev => ({...prev, reminderTime: value}))}>
+                <Select
+                  value={formData.reminderTime}
+                  onValueChange={(value) =>
+                    setFormData((prev) => ({ ...prev, reminderTime: value }))
+                  }
+                >
                   <SelectTrigger className="h-14 text-large">
                     <SelectValue placeholder="Choose your preferred time" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="morning">Morning (8:00 AM - 10:00 AM)</SelectItem>
-                    <SelectItem value="midday">Midday (12:00 PM - 2:00 PM)</SelectItem>
-                    <SelectItem value="afternoon">Afternoon (3:00 PM - 5:00 PM)</SelectItem>
-                    <SelectItem value="evening">Evening (6:00 PM - 8:00 PM)</SelectItem>
-                    <SelectItem value="multiple">Multiple times a day</SelectItem>
+                    <SelectItem value="morning">
+                      Morning (8:00 AM - 10:00 AM)
+                    </SelectItem>
+                    <SelectItem value="midday">
+                      Midday (12:00 PM - 2:00 PM)
+                    </SelectItem>
+                    <SelectItem value="afternoon">
+                      Afternoon (3:00 PM - 5:00 PM)
+                    </SelectItem>
+                    <SelectItem value="evening">
+                      Evening (6:00 PM - 8:00 PM)
+                    </SelectItem>
+                    <SelectItem value="multiple">
+                      Multiple times a day
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -146,20 +187,28 @@ const Onboarding = () => {
                 <div className="flex items-start gap-3">
                   <Heart className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="text-xl font-semibold mb-2 text-primary">You're Almost Ready!</h3>
+                    <h3 className="text-xl font-semibold mb-2 text-primary">
+                      You're Almost Ready!
+                    </h3>
                     <p className="text-large text-muted-foreground">
-                      Once you save your preferences, Lifence will start sending you personalized reminders to help you build these healthy habits.
+                      Once you save your preferences, Lifence will start sending
+                      you personalized reminders to help you build these healthy
+                      habits.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
-                variant="hero" 
-                size="xl" 
+              <Button
+                type="submit"
+                variant="hero"
+                size="xl"
                 className="w-full shadow-button"
-                disabled={!formData.age || formData.habits.length === 0 || !formData.reminderTime}
+                disabled={
+                  !formData.age ||
+                  formData.habits.length === 0 ||
+                  !formData.reminderTime
+                }
               >
                 Save & Start My Journey
                 <ArrowRight className="ml-2 h-5 w-5" />
